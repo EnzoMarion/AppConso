@@ -16,16 +16,29 @@ public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
 
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         HomeViewModel homeViewModel =
                 new ViewModelProvider(this).get(HomeViewModel.class);
 
+        // Binding pour accéder directement aux éléments du layout
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textHome;
-        homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        // Mise à jour des sections avec des données
+        homeViewModel.getEnergyConsumptionData().observe(getViewLifecycleOwner(), data -> {
+            binding.energyConsumptionData.setText(data);
+        });
+
+        homeViewModel.getFranceEffortsData().observe(getViewLifecycleOwner(), data -> {
+            binding.franceEffortsData.setText(data);
+        });
+
+        homeViewModel.getClimateChangeData().observe(getViewLifecycleOwner(), data -> {
+            binding.climateChangeData.setText(data);
+        });
+
         return root;
     }
 

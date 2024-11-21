@@ -6,14 +6,30 @@ import androidx.lifecycle.ViewModel;
 
 public class HomeViewModel extends ViewModel {
 
-    private final MutableLiveData<String> mText;
+    private final MutableLiveData<String> energyConsumptionData;
+    private final MutableLiveData<String> franceEffortsData;
+    private final MutableLiveData<String> climateChangeData;
 
     public HomeViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("Page d'accueil");
+        energyConsumptionData = new MutableLiveData<>();
+        franceEffortsData = new MutableLiveData<>();
+        climateChangeData = new MutableLiveData<>();
+
+        // Initialisation des données
+        energyConsumptionData.setValue("Énergie consommée : 450 TWh");
+        franceEffortsData.setValue("Réduction des émissions de CO2 : 10% par rapport à 2022.");
+        climateChangeData.setValue("Température mondiale moyenne : +1.5°C par rapport à l'ère préindustrielle.");
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    public LiveData<String> getEnergyConsumptionData() {
+        return energyConsumptionData;
+    }
+
+    public LiveData<String> getFranceEffortsData() {
+        return franceEffortsData;
+    }
+
+    public LiveData<String> getClimateChangeData() {
+        return climateChangeData;
     }
 }
