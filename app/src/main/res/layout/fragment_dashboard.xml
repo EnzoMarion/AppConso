@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.dashboard.DashboardFragment">
 
+    <!-- Titre du Dashboard -->
     <TextView
         android:id="@+id/text_dashboard"
         android:layout_width="match_parent"
@@ -19,6 +20,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
+    <!-- Personnes dans le foyer -->
     <TextView
         android:id="@+id/Personne"
         android:layout_width="wrap_content"
@@ -31,6 +33,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginStart="16dp"/>
 
+    <!-- EditText pour entrer le nombre de personnes -->
     <EditText
         android:id="@+id/EditPers"
         android:layout_width="wrap_content"
@@ -44,6 +47,7 @@
         app:layout_constraintStart_toEndOf="@+id/Personne"
         app:layout_constraintTop_toTopOf="@+id/Personne" />
 
+    <!-- Conteneur pour les champs de consommation -->
     <LinearLayout
         android:id="@+id/container"
         android:orientation="vertical"
@@ -57,6 +61,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
+        <!-- Consommation d'eau -->
         <EditText
             android:id="@+id/EditConsEau"
             android:layout_width="match_parent"
@@ -68,6 +73,7 @@
             android:textSize="16sp"
             android:layout_marginBottom="16dp"/>
 
+        <!-- Consommation d'électricité -->
         <EditText
             android:id="@+id/EditConsElec"
             android:layout_width="match_parent"
@@ -79,6 +85,7 @@
             android:textSize="16sp"
             android:layout_marginBottom="16dp"/>
 
+        <!-- Consommation de gaz -->
         <EditText
             android:id="@+id/EditConsGaz"
             android:layout_width="match_parent"
@@ -88,8 +95,9 @@
             android:padding="16dp"
             android:textColor="#333333"
             android:textSize="16sp"
-            android:layout_marginBottom="32dp"/>
+            android:layout_marginBottom="16dp"/>
 
+        <!-- Bouton pour valider -->
         <Button
             android:id="@+id/button"
             android:layout_width="match_parent"
@@ -99,8 +107,100 @@
             android:textColor="#FFFFFF"
             android:textSize="18sp"
             android:padding="16dp"/>
-
     </LinearLayout>
 
+    <!-- Section des sources d'énergie alternatives -->
+    <TextView
+        android:id="@+id/text_alt_energy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Autres sources d'énergie"
+        android:textSize="18sp"
+        android:textColor="#333333"
+        app:layout_constraintTop_toBottomOf="@+id/container"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"/>
+
+    <!-- Checkbox pour activer la récupération d'eau de pluie -->
+    <CheckBox
+        android:id="@+id/checkbox_water"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Récupération d'eau de pluie"
+        app:layout_constraintTop_toBottomOf="@+id/text_alt_energy"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"/>
+
+    <!-- Zone d'édition pour l'eau de pluie (visible si la case est cochée) -->
+    <EditText
+        android:id="@+id/edit_text_water"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Litres d'eau récupérés"
+        android:inputType="numberDecimal"
+        android:padding="16dp"
+        android:textColor="#333333"
+        android:textSize="16sp"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/checkbox_water"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"/>
+
+    <!-- Checkbox pour activer les panneaux solaires -->
+    <CheckBox
+        android:id="@+id/checkbox_solar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Panneaux solaires"
+        app:layout_constraintTop_toBottomOf="@+id/edit_text_water"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"/>
+
+    <!-- Zone d'édition pour panneaux solaires -->
+    <EditText
+        android:id="@+id/edit_text_solar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="kWh produits"
+        android:inputType="numberDecimal"
+        android:padding="16dp"
+        android:textColor="#333333"
+        android:textSize="16sp"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/checkbox_solar"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"/>
+
+    <!-- Checkbox pour activer le chauffage au bois -->
+    <CheckBox
+        android:id="@+id/checkbox_wood"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Chauffage au bois"
+        app:layout_constraintTop_toBottomOf="@+id/edit_text_solar"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"/>
+
+    <!-- Zone d'édition pour le chauffage au bois -->
+    <EditText
+        android:id="@+id/edit_text_wood"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Temps d'utilisation (heures)"
+        android:inputType="numberDecimal"
+        android:padding="16dp"
+        android:textColor="#333333"
+        android:textSize="16sp"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/checkbox_wood"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
