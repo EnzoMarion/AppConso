@@ -26,18 +26,7 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        // Mise à jour des sections avec des données
-        homeViewModel.getEnergyConsumptionData().observe(getViewLifecycleOwner(), data -> {
-            binding.energyConsumptionData.setText(data);
-        });
 
-        homeViewModel.getFranceEffortsData().observe(getViewLifecycleOwner(), data -> {
-            binding.franceEffortsData.setText(data);
-        });
-
-        homeViewModel.getClimateChangeData().observe(getViewLifecycleOwner(), data -> {
-            binding.climateChangeData.setText(data);
-        });
 
         return root;
     }
