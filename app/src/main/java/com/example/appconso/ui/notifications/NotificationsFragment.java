@@ -51,15 +51,11 @@ public class NotificationsFragment extends Fragment {
         float consGaz = sharedPreferences.getFloat(KEY_CONS_GAZ, -1);
         int personnes = sharedPreferences.getInt(KEY_PERSONNES, 1); // Par défaut 1 personne
 
-        // Calcul de la consommation par personne
-        double consEauParPersonne = consEau / personnes;
-        double consElecParPersonne = consElec / personnes;
-        double consGazParPersonne = consGaz / personnes;
-
         // Mise à jour de l'affichage avec les valeurs récupérées
         if (consEau != -1) {
             consEauTextView.setText("Consommation d'eau: " + consEau + " m³");
-            updateComparison(consEauParPersonne, MOYENNE_EAU, comparaisonEau, "eau");
+            double moyenneEau = MOYENNE_EAU * personnes;
+            updateComparison(consEau, moyenneEau, comparaisonEau, "eau", personnes);
         } else {
             consEauTextView.setText("Aucune donnée pour la consommation d'eau");
             comparaisonEau.setVisibility(View.GONE);
@@ -67,7 +63,8 @@ public class NotificationsFragment extends Fragment {
 
         if (consElec != -1) {
             consElecTextView.setText("Consommation d'électricité: " + consElec + " kWh");
-            updateComparison(consElecParPersonne, MOYENNE_ELEC, comparaisonElec, "électricité");
+            double moyenneElec = MOYENNE_ELEC * personnes;
+            updateComparison(consElec, moyenneElec, comparaisonElec, "électricité", personnes);
         } else {
             consElecTextView.setText("Aucune donnée pour la consommation d'électricité");
             comparaisonElec.setVisibility(View.GONE);
@@ -75,7 +72,8 @@ public class NotificationsFragment extends Fragment {
 
         if (consGaz != -1) {
             consGazTextView.setText("Consommation de gaz: " + consGaz + " m³");
-            updateComparison(consGazParPersonne, MOYENNE_GAZ, comparaisonGaz, "gaz");
+            double moyenneGaz = MOYENNE_GAZ * personnes;
+            updateComparison(consGaz, moyenneGaz, comparaisonGaz, "gaz", personnes);
         } else {
             consGazTextView.setText("Aucune donnée pour la consommation de gaz");
             comparaisonGaz.setVisibility(View.GONE);
@@ -84,24 +82,24 @@ public class NotificationsFragment extends Fragment {
         return root;
     }
 
-    private void updateComparison(double consParPersonne, double moyenne, TextView comparaisonTextView, String typeConsommation) {
-        double difference = consParPersonne - moyenne;
-        double pourcentage = (difference / moyenne) * 100; // Calcul de la différence en pourcentage
+    private void updateComparison(double consTotale, double moyenne, TextView comparaisonTextView, String typeConsommation, int personnes) {
+        double difference = consTotale - moyenne;
+        double pourcentage = (difference / moyenne) * 100;
         String message;
         int color;
 
         // Déterminer si la consommation est plus ou moins que la moyenne
         if (difference == 0) {
-            message = String.format("Vous consommez **0%%** (0.00) d'%s que la moyenne française par personne par mois (%.2f).", typeConsommation, moyenne);
-            color = getResources().getColor(android.R.color.darker_gray); // Couleur neutre
+            message = String.format("Vous consommez 0%% (0.00) d'%s que la moyenne française pour un foyer de %d personnes par mois (%.2f).", typeConsommation, personnes, moyenne);
+            color = getResources().getColor(android.R.color.darker_gray);
         } else if (difference < 0) {
-            message = String.format("Vous consommez **%.2f%%** (%.2f) **moins** d'%s que la moyenne française par personne par mois (%.2f).",
-                    Math.abs(pourcentage), Math.abs(difference), typeConsommation, moyenne);
-            color = getResources().getColor(android.R.color.holo_green_dark); // Consommation inférieure à la moyenne
+            message = String.format("Vous consommez %.2f%% (%.2f) moins d'%s que la moyenne française pour un foyer de %d personnes par mois (%.2f).",
+                    Math.abs(pourcentage), Math.abs(difference), typeConsommation, personnes, moyenne);
+            color = getResources().getColor(android.R.color.holo_green_dark);
         } else {
-            message = String.format("Vous consommez **%.2f%%** (%.2f) **plus** d'%s que la moyenne française par personne par mois (%.2f).",
-                    pourcentage, difference, typeConsommation, moyenne);
-            color = getResources().getColor(android.R.color.holo_red_dark); // Consommation supérieure à la moyenne
+            message = String.format("Vous consommez %.2f%% (%.2f) plus d'%s que la moyenne française pour un foyer de %d personnes par mois (%.2f).",
+                    pourcentage, difference, typeConsommation, personnes, moyenne);
+            color = getResources().getColor(android.R.color.holo_red_dark);
         }
 
         comparaisonTextView.setText(message);
