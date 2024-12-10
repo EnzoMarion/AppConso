@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F9F9F9"
     tools:context=".ui.notifications.NotificationsFragment">
 
     <!-- ScrollView pour permettre le défilement -->
@@ -20,8 +21,8 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="vertical"
-            android:layout_marginTop="50dp"
-            android:layout_marginBottom="16dp">
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="40dp">
 
             <!-- Consommation d'eau -->
             <androidx.cardview.widget.CardView
@@ -183,7 +184,7 @@
                 android:padding="16dp"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="8dp"
-                android:backgroundTint="#E1F5FE">
+                android:backgroundTint="#FFEBEE">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -221,7 +222,7 @@
                 android:padding="16dp"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="8dp"
-                android:backgroundTint="#C8E6C9">
+                android:backgroundTint="#F3EBFF">
 
                 <LinearLayout
                     android:layout_width="match_parent"
