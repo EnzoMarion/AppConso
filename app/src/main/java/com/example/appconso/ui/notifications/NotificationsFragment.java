@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.cardview.widget.CardView;
 
 import com.example.appconso.R;
 
@@ -21,62 +20,61 @@ public class NotificationsFragment extends Fragment {
     private static final String KEY_CONS_ELEC = "key_cons_elec";
     private static final String KEY_CONS_GAZ = "key_cons_gaz";
     private static final String KEY_PERSONNES = "key_personnes";
+    private static final String KEY_WATER = "key_water";
 
     // Moyennes nationales par personne (en unités mensuelles)
     private static final double MOYENNE_EAU = 4.55; // m³ par mois
     private static final double MOYENNE_ELEC = 300; // kWh par mois
     private static final double MOYENNE_GAZ = 100; // m³ par mois
+    private static final double PRIX_EAU = 3.5; // €/m³ (exemple)
 
     private TextView consEauTextView, consElecTextView, consGazTextView;
-    private TextView comparaisonEau, comparaisonElec, comparaisonGaz;
+    private TextView comparaisonEau, comparaisonElec, comparaisonGaz, consPluie, pluie;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        // Lier la vue avec le layout
         View root = inflater.inflate(R.layout.fragment_notifications, container, false);
 
-        // Initialisation des TextViews
         consEauTextView = root.findViewById(R.id.consEau);
         consElecTextView = root.findViewById(R.id.consElec);
         consGazTextView = root.findViewById(R.id.consGaz);
         comparaisonEau = root.findViewById(R.id.comparaisonEau);
         comparaisonElec = root.findViewById(R.id.comparaisonElec);
         comparaisonGaz = root.findViewById(R.id.comparaisonGaz);
+        consPluie = root.findViewById(R.id.consPluie);
+        pluie = root.findViewById(R.id.pluie);
 
-        // Récupérer les données de consommation et le nombre de personnes
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         float consEau = sharedPreferences.getFloat(KEY_CONS_EAU, -1);
         float consElec = sharedPreferences.getFloat(KEY_CONS_ELEC, -1);
         float consGaz = sharedPreferences.getFloat(KEY_CONS_GAZ, -1);
-        int personnes = sharedPreferences.getInt(KEY_PERSONNES, 1); // Par défaut 1 personne
+        float eauDePluie = sharedPreferences.getFloat(KEY_WATER, -1);
+        int personnes = sharedPreferences.getInt(KEY_PERSONNES, 1);
 
-        // Mise à jour de l'affichage avec les valeurs récupérées
+        if (eauDePluie != -1) {
+            double economie = eauDePluie * PRIX_EAU / 1000;
+            pluie.setText(String.format("Vous avez récupéré %.2f litres d'eau de pluie, économisant %.2f €.", eauDePluie, economie));
+        } else {
+            pluie.setText("Aucune donnée sur l'eau de pluie.");
+        }
+
         if (consEau != -1) {
             consEauTextView.setText("Consommation d'eau: " + consEau + " m³");
             double moyenneEau = MOYENNE_EAU * personnes;
             updateComparison(consEau, moyenneEau, comparaisonEau, "eau", personnes);
-        } else {
-            consEauTextView.setText("Aucune donnée pour la consommation d'eau");
-            comparaisonEau.setVisibility(View.GONE);
         }
 
         if (consElec != -1) {
             consElecTextView.setText("Consommation d'électricité: " + consElec + " kWh");
             double moyenneElec = MOYENNE_ELEC * personnes;
             updateComparison(consElec, moyenneElec, comparaisonElec, "électricité", personnes);
-        } else {
-            consElecTextView.setText("Aucune donnée pour la consommation d'électricité");
-            comparaisonElec.setVisibility(View.GONE);
         }
 
         if (consGaz != -1) {
             consGazTextView.setText("Consommation de gaz: " + consGaz + " m³");
             double moyenneGaz = MOYENNE_GAZ * personnes;
             updateComparison(consGaz, moyenneGaz, comparaisonGaz, "gaz", personnes);
-        } else {
-            consGazTextView.setText("Aucune donnée pour la consommation de gaz");
-            comparaisonGaz.setVisibility(View.GONE);
         }
 
         return root;

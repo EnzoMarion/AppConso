@@ -12,7 +12,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.example.appconso.databinding.FragmentDashboardBinding;
 
@@ -21,22 +20,22 @@ public class DashboardFragment extends Fragment {
     private FragmentDashboardBinding binding;
 
     private EditText EditConsEau, EditConsElec, EditConsGaz, EditPers;
-    private CheckBox checkboxWater, checkboxSolar, checkboxWood; // Déclarations des CheckBox
-    private EditText editTextWater, editTextSolar, editTextWood; // Déclarations des EditText
+    private CheckBox checkboxWater, checkboxSolar, checkboxWood;
+    private EditText editTextWater, editTextSolar, editTextWood;
 
     private static final String PREFS_NAME = "AppConsoPrefs";
     private static final String KEY_CONS_EAU = "key_cons_eau";
     private static final String KEY_CONS_ELEC = "key_cons_elec";
     private static final String KEY_CONS_GAZ = "key_cons_gaz";
     private static final String KEY_PERSONNES = "key_personnes";
+    private static final String KEY_WATER = "key_water";
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-
         binding = FragmentDashboardBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        // Initialisation des EditText et CheckBox
+        // Initialisation des champs
         EditConsEau = binding.EditConsEau;
         EditConsElec = binding.EditConsElec;
         EditConsGaz = binding.EditConsGaz;
@@ -50,38 +49,20 @@ public class DashboardFragment extends Fragment {
         editTextSolar = binding.editTextSolar;
         editTextWood = binding.editTextWood;
 
-        // Initialisez les EditText à invisibles par défaut
+        // Rendre les champs supplémentaires invisibles
         editTextWater.setVisibility(View.GONE);
         editTextSolar.setVisibility(View.GONE);
         editTextWood.setVisibility(View.GONE);
 
-        // Ecouteur pour la CheckBox de la récupération d'eau de pluie
-        checkboxWater.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked) {
-                editTextWater.setVisibility(View.VISIBLE);
-            } else {
-                editTextWater.setVisibility(View.GONE);
-            }
-        });
+        // Gestion des CheckBox
+        checkboxWater.setOnCheckedChangeListener((buttonView, isChecked) ->
+                editTextWater.setVisibility(isChecked ? View.VISIBLE : View.GONE));
+        checkboxSolar.setOnCheckedChangeListener((buttonView, isChecked) ->
+                editTextSolar.setVisibility(isChecked ? View.VISIBLE : View.GONE));
+        checkboxWood.setOnCheckedChangeListener((buttonView, isChecked) ->
+                editTextWood.setVisibility(isChecked ? View.VISIBLE : View.GONE));
 
-        // Ecouteur pour la CheckBox des panneaux solaires
-        checkboxSolar.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked) {
-                editTextSolar.setVisibility(View.VISIBLE);
-            } else {
-                editTextSolar.setVisibility(View.GONE);
-            }
-        });
-
-        // Ecouteur pour la CheckBox du chauffage au bois
-        checkboxWood.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked) {
-                editTextWood.setVisibility(View.VISIBLE);
-            } else {
-                editTextWood.setVisibility(View.GONE);
-            }
-        });
-
+        // Sauvegarde des données
         binding.button.setOnClickListener(v -> {
             String consEauInput = EditConsEau.getText().toString();
             String consElecInput = EditConsElec.getText().toString();
@@ -95,36 +76,21 @@ public class DashboardFragment extends Fragment {
                     double consGazValue = Double.parseDouble(consGazInput);
                     int personnesValue = Integer.parseInt(persInput);
 
-                    // Sauvegarde des données dans SharedPreferences
-                    SharedPreferences sharedPreferences = getActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+                    SharedPreferences sharedPreferences = getActivity()
+                            .getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putFloat(KEY_CONS_EAU, (float) consEauValue);
                     editor.putFloat(KEY_CONS_ELEC, (float) consElecValue);
                     editor.putFloat(KEY_CONS_GAZ, (float) consGazValue);
                     editor.putInt(KEY_PERSONNES, personnesValue);
 
-                    // Ajoutez ici la sauvegarde des valeurs des autres champs si nécessaire
-                    if (checkboxWater.isChecked()) {
-                        String waterInput = editTextWater.getText().toString();
-                        if (!waterInput.isEmpty()) {
-                            editor.putFloat("key_water", Float.parseFloat(waterInput));
-                        }
-                    }
-                    if (checkboxSolar.isChecked()) {
-                        String solarInput = editTextSolar.getText().toString();
-                        if (!solarInput.isEmpty()) {
-                            editor.putFloat("key_solar", Float.parseFloat(solarInput));
-                        }
-                    }
-                    if (checkboxWood.isChecked()) {
-                        String woodInput = editTextWood.getText().toString();
-                        if (!woodInput.isEmpty()) {
-                            editor.putFloat("key_wood", Float.parseFloat(woodInput));
-                        }
+                    if (checkboxWater.isChecked() && !editTextWater.getText().toString().isEmpty()) {
+                        editor.putFloat(KEY_WATER, Float.parseFloat(editTextWater.getText().toString()));
+                    } else {
+                        editor.remove(KEY_WATER); // Supprimer les données si non cochée
                     }
 
                     editor.apply();
-
                     Toast.makeText(getActivity(), "Données enregistrées avec succès !", Toast.LENGTH_SHORT).show();
 
                 } catch (NumberFormatException e) {
