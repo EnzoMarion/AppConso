@@ -21,15 +21,18 @@ public class NotificationsFragment extends Fragment {
     private static final String KEY_CONS_GAZ = "key_cons_gaz";
     private static final String KEY_PERSONNES = "key_personnes";
     private static final String KEY_WATER = "key_water";
+    private static final String KEY_SOLAR = "key_solar";
 
     // Moyennes nationales par personne (en unités mensuelles)
     private static final double MOYENNE_EAU = 4.55; // m³ par mois
     private static final double MOYENNE_ELEC = 300; // kWh par mois
     private static final double MOYENNE_GAZ = 100; // m³ par mois
     private static final double PRIX_EAU = 3.5; // €/m³ (exemple)
+    private static final double PRIX_ELEC_KWH = 0.15; // Prix moyen de l'électricité en €/kWh
 
     private TextView consEauTextView, consElecTextView, consGazTextView;
     private TextView comparaisonEau, comparaisonElec, comparaisonGaz, consPluie, pluie;
+    private TextView consSolaire, Solaire;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -44,6 +47,8 @@ public class NotificationsFragment extends Fragment {
         comparaisonGaz = root.findViewById(R.id.comparaisonGaz);
         consPluie = root.findViewById(R.id.consPluie);
         pluie = root.findViewById(R.id.pluie);
+        consSolaire = root.findViewById(R.id.consSolaire);
+        Solaire = root.findViewById(R.id.Solaire);
 
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         float consEau = sharedPreferences.getFloat(KEY_CONS_EAU, -1);
@@ -51,6 +56,7 @@ public class NotificationsFragment extends Fragment {
         float consGaz = sharedPreferences.getFloat(KEY_CONS_GAZ, -1);
         float eauDePluie = sharedPreferences.getFloat(KEY_WATER, -1);
         int personnes = sharedPreferences.getInt(KEY_PERSONNES, 1);
+        int nombrePanneaux = sharedPreferences.getInt(KEY_SOLAR, 0);
 
         if (eauDePluie != -1) {
             double economie = eauDePluie * PRIX_EAU / 1000;
@@ -75,6 +81,17 @@ public class NotificationsFragment extends Fragment {
             consGazTextView.setText("Consommation de gaz: " + consGaz + " m³");
             double moyenneGaz = MOYENNE_GAZ * personnes;
             updateComparison(consGaz, moyenneGaz, comparaisonGaz, "gaz", personnes);
+        }
+
+        if (nombrePanneaux > 0) {
+            double productionSolaireMensuelle = nombrePanneaux * 25; // kWh
+            double economieFinanciere = productionSolaireMensuelle * PRIX_ELEC_KWH;
+
+            consSolaire.setText("Panneaux solaires : " + nombrePanneaux + " panneaux");
+            Solaire.setText(String.format("Production mensuelle : %.2f kWh\nÉconomie financière : %.2f €", productionSolaireMensuelle, economieFinanciere));
+        } else {
+            consSolaire.setText("Aucun panneau solaire");
+            Solaire.setText("Aucune donnée disponible.");
         }
 
         return root;

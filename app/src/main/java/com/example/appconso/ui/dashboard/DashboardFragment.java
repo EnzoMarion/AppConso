@@ -29,6 +29,9 @@ public class DashboardFragment extends Fragment {
     private static final String KEY_CONS_GAZ = "key_cons_gaz";
     private static final String KEY_PERSONNES = "key_personnes";
     private static final String KEY_WATER = "key_water";
+    private static final String KEY_SOLAR = "key_solar";
+
+    private static final double PRODUCTION_PAR_PANNEAU = 0.36; // 360 Wc par panneau, environ 0.36 kWh/jour, donc 0.36 * 30 jours = 10.8 kWh/mois par panneau solaire
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -84,10 +87,12 @@ public class DashboardFragment extends Fragment {
                     editor.putFloat(KEY_CONS_GAZ, (float) consGazValue);
                     editor.putInt(KEY_PERSONNES, personnesValue);
 
-                    if (checkboxWater.isChecked() && !editTextWater.getText().toString().isEmpty()) {
-                        editor.putFloat(KEY_WATER, Float.parseFloat(editTextWater.getText().toString()));
+                    // Si les panneaux solaires sont activés, on récupère le nombre de panneaux et on sauvegarde
+                    if (checkboxSolar.isChecked() && !editTextSolar.getText().toString().isEmpty()) {
+                        int nombrePanneaux = Integer.parseInt(editTextSolar.getText().toString());
+                        editor.putInt(KEY_SOLAR, nombrePanneaux);
                     } else {
-                        editor.remove(KEY_WATER); // Supprimer les données si non cochée
+                        editor.remove(KEY_SOLAR);
                     }
 
                     editor.apply();

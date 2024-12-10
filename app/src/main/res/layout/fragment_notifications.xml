@@ -56,7 +56,7 @@
                         android:id="@+id/consEau"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Consommation d'eau"
+                        android:text="Consommation d'eau (m³)"
                         android:textAlignment="center"
                         android:textColor="#333333"
                         android:textSize="18sp"
@@ -94,7 +94,7 @@
                         android:id="@+id/consElec"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Consommation d'électricité"
+                        android:text="Consommation d'électricité (kWh)"
                         android:textAlignment="center"
                         android:textColor="#333333"
                         android:textSize="18sp"
@@ -143,14 +143,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="Comparatif de consommation de gaz"
+                        android:text="Comparatif de consommation de gaz (m³)"
                         android:textAlignment="center"
                         android:textColor="#333333"
                         android:textSize="16sp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Nouvelle ligne 1 : Emissions de CO2 -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -188,7 +187,6 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Nouvelle ligne 2 : Production d'énergie -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -226,7 +224,6 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Nouvelle ligne 3 : Énergie renouvelable -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -253,7 +250,7 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/comparaisonRenouvelable"
+                        android:id="@+id/Bois"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
