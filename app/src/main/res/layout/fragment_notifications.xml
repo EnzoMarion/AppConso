@@ -136,11 +136,12 @@
         android:id="@+id/buttonPrevision"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Prévision de consommation"
+        android:layout_marginBottom="124dp"
         android:backgroundTint="#4CAF50"
+        android:padding="16dp"
+        android:text="Prévision de consommation"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
-        android:padding="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="16dp"/>
+        tools:layout_editor_absoluteX="-16dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
