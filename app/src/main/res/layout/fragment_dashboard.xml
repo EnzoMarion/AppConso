@@ -6,201 +6,190 @@
     android:layout_height="match_parent"
     tools:context=".ui.dashboard.DashboardFragment">
 
-    <!-- Titre du Dashboard -->
-    <TextView
-        android:id="@+id/text_dashboard"
+    <!-- Utilisation du ScrollView pour permettre le défilement -->
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Tableau de bord"
-        android:textAlignment="center"
-        android:textSize="22sp"
-        android:textColor="#333333"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-    <!-- Personnes dans le foyer -->
-    <TextView
-        android:id="@+id/Personne"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Personne dans le foyer"
-        android:textColor="#333333"
-        android:textSize="18sp"
-        app:layout_constraintTop_toBottomOf="@+id/text_dashboard"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"/>
-
-    <!-- EditText pour entrer le nombre de personnes -->
-    <EditText
-        android:id="@+id/EditPers"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:hint="X"
-        android:inputType="numberDecimal"
-        android:padding="16dp"
-        android:textColor="#333333"
-        android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@+id/Personne"
-        app:layout_constraintTop_toTopOf="@+id/Personne" />
-
-    <!-- Conteneur pour les champs de consommation -->
-    <LinearLayout
-        android:id="@+id/container"
-        android:orientation="vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/Personne"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <!-- Consommation d'eau -->
-        <EditText
-            android:id="@+id/EditConsEau"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Consommation d'eau"
-            android:inputType="numberDecimal"
+            android:orientation="vertical"
             android:padding="16dp"
-            android:textColor="#333333"
-            android:textSize="16sp"
-            android:layout_marginBottom="16dp"/>
+            android:scrollbars="vertical"
+            android:layout_marginTop="16dp">
 
-        <!-- Consommation d'électricité -->
-        <EditText
-            android:id="@+id/EditConsElec"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Consommation d'électricité"
-            android:inputType="numberDecimal"
-            android:padding="16dp"
-            android:textColor="#333333"
-            android:textSize="16sp"
-            android:layout_marginBottom="16dp"/>
+            <!-- Titre du Dashboard -->
+            <TextView
+                android:id="@+id/text_dashboard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tableau de bord"
+                android:textAlignment="center"
+                android:textSize="22sp"
+                android:textColor="#333333"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"/>
 
-        <!-- Consommation de gaz -->
-        <EditText
-            android:id="@+id/EditConsGaz"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Consommation de gaz"
-            android:inputType="numberDecimal"
-            android:padding="16dp"
-            android:textColor="#333333"
-            android:textSize="16sp"
-            android:layout_marginBottom="16dp"/>
+            <!-- Consommation d'eau -->
+            <TextView
+                android:id="@+id/text_eau"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Consommation d'eau (m³)"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="4dp"/>
 
-        <!-- Bouton pour valider -->
-        <Button
-            android:id="@+id/button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Valider"
-            android:backgroundTint="#4CAF50"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp"
-            android:padding="16dp"/>
-    </LinearLayout>
+            <EditText
+                android:id="@+id/EditConsEau"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Entrez votre consommation d'eau"
+                android:inputType="numberDecimal"
+                android:padding="10dp"
+                android:textColor="#333333"
+                android:textSize="14sp"
+                android:layout_marginBottom="16dp"/>
 
-    <!-- Section des sources d'énergie alternatives -->
-    <TextView
-        android:id="@+id/text_alt_energy"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Autres sources d'énergie"
-        android:textSize="18sp"
-        android:textColor="#333333"
-        app:layout_constraintTop_toBottomOf="@+id/container"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"/>
+            <!-- Consommation d'électricité -->
+            <TextView
+                android:id="@+id/text_elec"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Consommation d'électricité (kWh)"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="4dp"/>
 
-    <!-- Checkbox pour activer la récupération d'eau de pluie -->
-    <CheckBox
-        android:id="@+id/checkbox_water"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Récupération d'eau de pluie"
-        app:layout_constraintTop_toBottomOf="@+id/text_alt_energy"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="16dp"/>
+            <EditText
+                android:id="@+id/EditConsElec"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Entrez votre consommation d'électricité"
+                android:inputType="numberDecimal"
+                android:padding="10dp"
+                android:textColor="#333333"
+                android:textSize="14sp"
+                android:layout_marginBottom="16dp"/>
 
-    <!-- Zone d'édition pour l'eau de pluie (visible si la case est cochée) -->
-    <EditText
-        android:id="@+id/edit_text_water"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Litres d'eau récupérés"
-        android:inputType="numberDecimal"
-        android:padding="16dp"
-        android:textColor="#333333"
-        android:textSize="16sp"
-        android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@+id/checkbox_water"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="16dp"/>
+            <!-- Consommation de gaz -->
+            <TextView
+                android:id="@+id/text_gaz"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Consommation de gaz (m³)"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="4dp"/>
 
-    <!-- Checkbox pour activer les panneaux solaires -->
-    <CheckBox
-        android:id="@+id/checkbox_solar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Panneaux solaires"
-        app:layout_constraintTop_toBottomOf="@+id/edit_text_water"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="16dp"/>
+            <EditText
+                android:id="@+id/EditConsGaz"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Entrez votre consommation de gaz"
+                android:inputType="numberDecimal"
+                android:padding="10dp"
+                android:textColor="#333333"
+                android:textSize="14sp"
+                android:layout_marginBottom="16dp"/>
 
-    <!-- Zone d'édition pour panneaux solaires -->
-    <EditText
-        android:id="@+id/edit_text_solar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="kWh produits"
-        android:inputType="numberDecimal"
-        android:padding="16dp"
-        android:textColor="#333333"
-        android:textSize="16sp"
-        android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@+id/checkbox_solar"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="16dp"/>
+            <!-- Nombre de personnes dans le foyer -->
+            <TextView
+                android:id="@+id/text_personnes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nombre de personnes dans le foyer"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="4dp"/>
 
-    <!-- Checkbox pour activer le chauffage au bois -->
-    <CheckBox
-        android:id="@+id/checkbox_wood"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Chauffage au bois"
-        app:layout_constraintTop_toBottomOf="@+id/edit_text_solar"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="16dp"/>
+            <EditText
+                android:id="@+id/EditPers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Entrez le nombre de personnes"
+                android:inputType="number"
+                android:padding="10dp"
+                android:textColor="#333333"
+                android:textSize="14sp"
+                android:layout_marginBottom="16dp"/>
 
-    <!-- Zone d'édition pour le chauffage au bois -->
-    <EditText
-        android:id="@+id/edit_text_wood"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Temps d'utilisation (heures)"
-        android:inputType="numberDecimal"
-        android:padding="16dp"
-        android:textColor="#333333"
-        android:textSize="16sp"
-        android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@+id/checkbox_wood"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="16dp"/>
+            <!-- CheckBox pour la récupération d'eau de pluie -->
+            <CheckBox
+                android:id="@+id/checkbox_water"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="4dp"
+                android:text="Récupération d'eau de pluie" />
+
+            <EditText
+                android:id="@+id/edit_text_water"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Litres d'eau récupérés"
+                android:inputType="numberDecimal"
+                android:padding="10dp"
+                android:textColor="#333333"
+                android:textSize="14sp"
+                android:visibility="gone"
+                android:layout_marginBottom="16dp"/>
+
+            <!-- CheckBox pour les panneaux solaires -->
+
+            <CheckBox
+                android:id="@+id/checkbox_solar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="4dp"
+                android:text="Panneaux solaires" />
+
+            <EditText
+                android:id="@+id/edit_text_solar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="kWh produits"
+                android:inputType="numberDecimal"
+                android:padding="10dp"
+                android:textColor="#333333"
+                android:textSize="14sp"
+                android:visibility="gone"
+                android:layout_marginBottom="16dp"/>
+
+            <!-- CheckBox pour le chauffage au bois -->
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Enregistrer" />
+
+            <CheckBox
+                android:id="@+id/checkbox_wood"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Chauffage au bois"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="4dp"/>
+
+            <EditText
+                android:id="@+id/edit_text_wood"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Temps d'utilisation (heures)"
+                android:inputType="numberDecimal"
+                android:padding="10dp"
+                android:textColor="#333333"
+                android:textSize="14sp"
+                android:visibility="gone"
+                android:layout_marginBottom="16dp"/>
+
+            <!-- Bouton de validation -->
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
