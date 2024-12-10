@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:text="Données Nationales en 2024"
         android:textColor="#000000"
-        android:textSize="20sp"
+        android:textSize="22sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

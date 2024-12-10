@@ -21,9 +21,21 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="vertical"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="20dp"
             android:layout_marginBottom="40dp">
 
+            <!-- Titre en haut -->
+            <TextView
+                android:id="@+id/titreStats"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Vos statistiques énergétiques"
+                android:textAlignment="center"
+                android:textColor="#333333"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="20dp"
+                tools:ignore="MissingConstraints" />
             <!-- Consommation d'eau -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
