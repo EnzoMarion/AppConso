@@ -166,7 +166,7 @@
                         android:id="@+id/EditConsGaz"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Entrez votre consommation de gaz (m³)"
+                        android:hint="Entrez votre consommation de gaz (kWh)"
                         android:inputType="numberDecimal"
                         android:padding="10dp"
                         android:textColor="#333333"

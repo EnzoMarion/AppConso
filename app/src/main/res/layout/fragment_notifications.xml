@@ -143,7 +143,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="Comparatif de consommation de gaz (m³)"
+                        android:text="Comparatif de consommation de gaz (kWh)"
                         android:textAlignment="center"
                         android:textColor="#333333"
                         android:textSize="16sp" />
