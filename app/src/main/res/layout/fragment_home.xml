@@ -361,17 +361,120 @@
 
         <!-- Consommation de la région -->
         <TextView
-            android:id="@+id/regional_consumption"
-            android:layout_width="275dp"
-            android:layout_height="26dp"
-            android:layout_marginTop="4dp"
+            android:id="@+id/regional_consumption_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Consommation de la région : 41 TWh"
             android:textColor="#0091EA"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/fossil_section" />
+
+        <!-- Consommation Résidentielle -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/residential_consumption_section"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="#F1F8E9"
+            android:padding="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/regional_consumption_label"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <TextView
+                android:id="@+id/residential_consumption_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Résidentiel"
+                android:textColor="#333333"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/residential_consumption_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="20 TWh"
+                android:textColor="#76C7C0"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/residential_consumption_label" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- Consommation Industrielle -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/industrial_consumption_section"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="#FFF9C4"
+            android:padding="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/residential_consumption_section"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <TextView
+                android:id="@+id/industrial_consumption_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Industriel"
+                android:textColor="#333333"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/industrial_consumption_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="15 TWh"
+                android:textColor="#F9A825"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/industrial_consumption_label" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- Autres consommations -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/other_consumption_section"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="#FFEBEE"
+            android:padding="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/industrial_consumption_section"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <TextView
+                android:id="@+id/other_consumption_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Autres"
+                android:textColor="#333333"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/other_consumption_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="6 TWh"
+                android:textColor="#D32F2F"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/other_consumption_label" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
