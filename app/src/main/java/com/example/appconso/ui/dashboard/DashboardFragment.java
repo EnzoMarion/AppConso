@@ -29,6 +29,12 @@ public class DashboardFragment extends Fragment {
     private static final String KEY_CONS_GAZ = "key_cons_gaz";
     private static final String KEY_PERSONNES = "key_personnes";
     private static final String KEY_WATER = "key_water";
+    private static final String KEY_SOLAR = "key_solar";
+    private static final String KEY_BOIS_KWH = "key_bois_kwh";
+    private static final String KEY_BOIS_ECONOMIE = "key_bois_economie";
+
+    private static final double ECONOMIE_KWH_PAR_HEURE_BOIS = 0.6; // 0.6 kWh économisé par heure de chauffage au bois
+    private static final double PRIX_KWH_GAZ = 0.09; // Prix moyen du kWh de gaz en €
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -76,6 +82,17 @@ public class DashboardFragment extends Fragment {
                     double consGazValue = Double.parseDouble(consGazInput);
                     int personnesValue = Integer.parseInt(persInput);
 
+                    // Récupérer le temps d'utilisation du chauffage au bois
+                    double tempsBois = 0;
+                    if (checkboxWood.isChecked() && !editTextWood.getText().toString().isEmpty()) {
+                        tempsBois = Double.parseDouble(editTextWood.getText().toString());
+                    }
+
+                    // Calcul de l'économie en kWh de gaz et de l'économie financière
+                    double economieKWh = tempsBois * ECONOMIE_KWH_PAR_HEURE_BOIS;
+                    double economieFinanciere = economieKWh * PRIX_KWH_GAZ;
+
+                    // Sauvegarde des données dans SharedPreferences
                     SharedPreferences sharedPreferences = getActivity()
                             .getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -83,11 +100,15 @@ public class DashboardFragment extends Fragment {
                     editor.putFloat(KEY_CONS_ELEC, (float) consElecValue);
                     editor.putFloat(KEY_CONS_GAZ, (float) consGazValue);
                     editor.putInt(KEY_PERSONNES, personnesValue);
+                    editor.putFloat(KEY_BOIS_KWH, (float) economieKWh);
+                    editor.putFloat(KEY_BOIS_ECONOMIE, (float) economieFinanciere);
 
-                    if (checkboxWater.isChecked() && !editTextWater.getText().toString().isEmpty()) {
-                        editor.putFloat(KEY_WATER, Float.parseFloat(editTextWater.getText().toString()));
+                    // Si les panneaux solaires sont activés, sauvegarder le nombre de panneaux
+                    if (checkboxSolar.isChecked() && !editTextSolar.getText().toString().isEmpty()) {
+                        int nombrePanneaux = Integer.parseInt(editTextSolar.getText().toString());
+                        editor.putInt(KEY_SOLAR, nombrePanneaux);
                     } else {
-                        editor.remove(KEY_WATER); // Supprimer les données si non cochée
+                        editor.remove(KEY_SOLAR);
                     }
 
                     editor.apply();

@@ -20,16 +20,23 @@ public class NotificationsFragment extends Fragment {
     private static final String KEY_CONS_ELEC = "key_cons_elec";
     private static final String KEY_CONS_GAZ = "key_cons_gaz";
     private static final String KEY_PERSONNES = "key_personnes";
-    private static final String KEY_WATER = "key_water";
+    private static final String KEY_WATER = "key_water"; // Eau de pluie
+
+    private static final String KEY_SOLAR = "key_solar";
+    private static final String KEY_BOIS_KWH = "key_bois_kwh"; // Chauffage au bois
+    private static final String KEY_BOIS_ECONOMIE = "key_bois_economie"; // Economie gaz avec le bois
 
     // Moyennes nationales par personne (en unités mensuelles)
     private static final double MOYENNE_EAU = 4.55; // m³ par mois
     private static final double MOYENNE_ELEC = 300; // kWh par mois
-    private static final double MOYENNE_GAZ = 100; // m³ par mois
+    private static final double MOYENNE_GAZ = 186; // kWh de gaz par mois
     private static final double PRIX_EAU = 3.5; // €/m³ (exemple)
+    private static final double PRIX_ELEC_KWH = 0.15; // Prix moyen de l'électricité en €/kWh
 
     private TextView consEauTextView, consElecTextView, consGazTextView;
     private TextView comparaisonEau, comparaisonElec, comparaisonGaz, consPluie, pluie;
+    private TextView consSolaire, Solaire;
+    private TextView consBois, Bois;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -44,6 +51,10 @@ public class NotificationsFragment extends Fragment {
         comparaisonGaz = root.findViewById(R.id.comparaisonGaz);
         consPluie = root.findViewById(R.id.consPluie);
         pluie = root.findViewById(R.id.pluie);
+        consSolaire = root.findViewById(R.id.consSolaire);
+        Solaire = root.findViewById(R.id.Solaire);
+        consBois = root.findViewById(R.id.consBois);
+        Bois = root.findViewById(R.id.Bois);
 
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         float consEau = sharedPreferences.getFloat(KEY_CONS_EAU, -1);
@@ -51,7 +62,13 @@ public class NotificationsFragment extends Fragment {
         float consGaz = sharedPreferences.getFloat(KEY_CONS_GAZ, -1);
         float eauDePluie = sharedPreferences.getFloat(KEY_WATER, -1);
         int personnes = sharedPreferences.getInt(KEY_PERSONNES, 1);
+        int nombrePanneaux = sharedPreferences.getInt(KEY_SOLAR, 0);
 
+        // Récupération de l'information du chauffage au bois
+        float boisKwh = sharedPreferences.getFloat(KEY_BOIS_KWH, 0);
+        float economieBois = sharedPreferences.getFloat(KEY_BOIS_ECONOMIE, 0);
+
+        // Affichage des informations sur l'eau de pluie
         if (eauDePluie != -1) {
             double economie = eauDePluie * PRIX_EAU / 1000;
             pluie.setText(String.format("Vous avez récupéré %.2f litres d'eau de pluie, économisant %.2f €.", eauDePluie, economie));
@@ -59,6 +76,16 @@ public class NotificationsFragment extends Fragment {
             pluie.setText("Aucune donnée sur l'eau de pluie.");
         }
 
+        // Affichage des informations sur le chauffage au bois
+        if (boisKwh > 0) {
+            consBois.setText("Chauffage au bois :");
+            Bois.setText(String.format("Temps d'utilisation : %.2f heures\nÉconomie de gaz : %.2f kWh\nÉconomie financière : %.2f €", boisKwh / 0.6, boisKwh, economieBois));
+        } else {
+            consBois.setText("Aucune donnée sur le chauffage au bois.");
+            Bois.setText("Aucune donnée disponible.");
+        }
+
+        // Affichage des consommations d'eau, d'électricité et de gaz
         if (consEau != -1) {
             consEauTextView.setText("Consommation d'eau: " + consEau + " m³");
             double moyenneEau = MOYENNE_EAU * personnes;
@@ -72,9 +99,21 @@ public class NotificationsFragment extends Fragment {
         }
 
         if (consGaz != -1) {
-            consGazTextView.setText("Consommation de gaz: " + consGaz + " m³");
+            consGazTextView.setText("Consommation de gaz: " + consGaz + " kWh");
             double moyenneGaz = MOYENNE_GAZ * personnes;
             updateComparison(consGaz, moyenneGaz, comparaisonGaz, "gaz", personnes);
+        }
+
+        // Affichage des panneaux solaires
+        if (nombrePanneaux > 0) {
+            double productionSolaireMensuelle = nombrePanneaux * 25; // kWh
+            double economieFinanciere = productionSolaireMensuelle * PRIX_ELEC_KWH;
+
+            consSolaire.setText("Panneaux solaires " + nombrePanneaux + " panneaux");
+            Solaire.setText(String.format("Production mensuelle : %.2f kWh\nÉconomie financière : %.2f €", productionSolaireMensuelle, economieFinanciere));
+        } else {
+            consSolaire.setText("Aucun panneau solaire");
+            Solaire.setText("Aucune donnée disponible.");
         }
 
         return root;
@@ -86,9 +125,8 @@ public class NotificationsFragment extends Fragment {
         String message;
         int color;
 
-        // Déterminer si la consommation est plus ou moins que la moyenne
         if (difference == 0) {
-            message = String.format("Vous consommez 0%% (0.00) d'%s que la moyenne française pour un foyer de %d personnes par mois (%.2f).", typeConsommation, personnes, moyenne);
+            message = String.format("Vous consommez autant d'%s que la moyenne française pour un foyer de %d personnes par mois (%.2f).", typeConsommation, personnes, moyenne);
             color = getResources().getColor(android.R.color.darker_gray);
         } else if (difference < 0) {
             message = String.format("Vous consommez %.2f%% (%.2f) moins d'%s que la moyenne française pour un foyer de %d personnes par mois (%.2f).",
