@@ -167,21 +167,21 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/consCO2"
+                        android:id="@+id/consPluie"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="TEXT"
+                        android:text="Eau de Pluie"
                         android:textAlignment="center"
                         android:textColor="#333333"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/comparaisonCO2"
+                        android:id="@+id/pluie"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="TEXT"
+                        android:text="Aucune donnée"
                         android:textAlignment="center"
                         android:textColor="#333333"
                         android:textSize="16sp" />
@@ -205,21 +205,21 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/consProduction"
+                        android:id="@+id/consSolaire"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="TEXT"
+                        android:text="Panneau Solaire"
                         android:textAlignment="center"
                         android:textColor="#333333"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/comparaisonProduction"
+                        android:id="@+id/Solaire"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="TEXT"
+                        android:text="Aucune donnée"
                         android:textAlignment="center"
                         android:textColor="#333333"
                         android:textSize="16sp" />
@@ -243,10 +243,10 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/consRenouvelable"
+                        android:id="@+id/consBois"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="TEXT"
+                        android:text="Chauffage au bois"
                         android:textAlignment="center"
                         android:textColor="#333333"
                         android:textSize="18sp"
@@ -257,7 +257,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="TEXT"
+                        android:text="Aucune Donnée"
                         android:textAlignment="center"
                         android:textColor="#333333"
                         android:textSize="16sp" />
