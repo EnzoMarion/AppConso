@@ -103,7 +103,14 @@ public class DashboardFragment extends Fragment {
                     editor.putFloat(KEY_BOIS_KWH, (float) economieKWh);
                     editor.putFloat(KEY_BOIS_ECONOMIE, (float) economieFinanciere);
 
-                    // Si les panneaux solaires sont activés, sauvegarder le nombre de panneaux
+                    // Sauvegarde pour l'eau
+                    if (checkboxWater.isChecked() && !editTextWater.getText().toString().isEmpty()) {
+                        editor.putFloat(KEY_WATER, Float.parseFloat(editTextWater.getText().toString()));
+                    } else {
+                        editor.remove(KEY_WATER);
+                    }
+
+                    // Sauvegarde pour les panneaux solaires
                     if (checkboxSolar.isChecked() && !editTextSolar.getText().toString().isEmpty()) {
                         int nombrePanneaux = Integer.parseInt(editTextSolar.getText().toString());
                         editor.putInt(KEY_SOLAR, nombrePanneaux);
