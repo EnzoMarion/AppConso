@@ -1,22 +1,377 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F9F9F9"
     tools:context=".ui.home.HomeFragment">
 
+    <!-- Titre principal -->
     <TextView
-        android:id="@+id/text_home"
-        android:layout_width="match_parent"
+        android:id="@+id/title"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
+        android:text="Données Nationales en 2024"
+        android:textColor="#000000"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="16dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp" />
+
+    <!-- Section Données Nationales -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/national_data_section"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="#FFFFFF"
+        android:elevation="4dp"
+        android:padding="8dp"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <!-- Consommation -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/consumption"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:background="#F1F9FF"
+            android:padding="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.3">
+
+            <TextView
+                android:id="@+id/consumption_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Consommation"
+                android:textColor="#333333"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/consumption_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="443 TWh"
+                android:textColor="#0091EA"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/consumption_label" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- Production -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/production"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:background="#E8F5E9"
+            android:padding="8dp"
+            app:layout_constraintStart_toEndOf="@id/consumption"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.3">
+
+            <TextView
+                android:id="@+id/production_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Production"
+                android:textColor="#333333"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/production_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="600 TWh"
+                android:textColor="#388E3C"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/production_label" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- Emissions de CO2 -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/co2_emissions"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:background="#FFF3E0"
+            android:padding="8dp"
+            app:layout_constraintStart_toEndOf="@id/production"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.3">
+
+            <TextView
+                android:id="@+id/co2_emissions_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Emissions de CO₂"
+                android:textColor="#333333"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/co2_emissions_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="32 g/kWh"
+                android:textColor="#FF6D00"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/co2_emissions_label" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Section Données Régionales -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/regional_data_section"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="#FFFFFF"
+        android:elevation="4dp"
+        android:padding="8dp"
+        app:layout_constraintTop_toBottomOf="@id/national_data_section"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <!-- Entête région -->
+        <TextView
+            android:id="@+id/regional_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Région : Auvergne-Rhône-Alpes"
+            android:textColor="#333333"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/regional_production"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Production de la région : 116 TWh"
+            android:textColor="#388E3C"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/regional_label"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Sections énergétiques -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/nuclear_section"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="#E3F2FD"
+            android:padding="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/regional_production"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <TextView
+                android:id="@+id/nuclear_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nucléaire"
+                android:textColor="#333333"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/nuclear_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="83,6 TWh"
+                android:textColor="#1976D2"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/nuclear_label" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- Hydroélectricité -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/hydroelectric_section"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="#C8E6C9"
+            android:padding="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/nuclear_section"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <TextView
+                android:id="@+id/hydroelectric_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hydroélectricité"
+                android:textColor="#333333"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/hydroelectric_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="26,7 TWh"
+                android:textColor="#388E3C"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/hydroelectric_label" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- Solaire Photovoltaïque -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/solar_section"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="#FFF9C4"
+            android:padding="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/hydroelectric_section"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <TextView
+                android:id="@+id/solar_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Solaire Photovoltaïque"
+                android:textColor="#333333"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/solar_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2,4 TWh"
+                android:textColor="#FFEB3B"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/solar_label" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- Éolien -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/wind_section"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="#E1F5FE"
+            android:padding="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/solar_section"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <TextView
+                android:id="@+id/wind_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Éolien"
+                android:textColor="#333333"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/wind_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1,48 TWh"
+                android:textColor="#1976D2"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/wind_label" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- Thermique Fossile -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/fossil_section"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="#FFEBEE"
+            android:padding="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/wind_section"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <TextView
+                android:id="@+id/fossil_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Thermique Fossile"
+                android:textColor="#333333"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/fossil_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1,4 TWh"
+                android:textColor="#D32F2F"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fossil_label" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- Consommation de la région -->
+        <TextView
+            android:id="@+id/regional_consumption"
+            android:layout_width="275dp"
+            android:layout_height="26dp"
+            android:layout_marginTop="4dp"
+            android:text="Consommation de la région : 41 TWh"
+            android:textColor="#0091EA"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fossil_section" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
