@@ -33,7 +33,7 @@ public class DashboardFragment extends Fragment {
     private static final String KEY_BOIS_KWH = "key_bois_kwh";
     private static final String KEY_BOIS_ECONOMIE = "key_bois_economie";
 
-    private static final double ECONOMIE_KWH_PAR_HEURE_BOIS = 0.6; // 0.6 kWh économisé par heure de chauffage au bois
+    private static final double ECONOMIE_KWH_PAR_HEURE_BOIS = 5;
     private static final double PRIX_KWH_GAZ = 0.09; // Prix moyen du kWh de gaz en €
 
     public View onCreateView(@NonNull LayoutInflater inflater,

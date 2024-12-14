@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AppConso</string>
+    <string name="app_name">Conso Forecast</string>
     <string name="title_home">Accueil</string>
     <string name="title_dashboard">Tableau De Bord</string>
     <string name="title_notifications">Statistiques</string>
